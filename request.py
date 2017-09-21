@@ -48,7 +48,9 @@ class Request:
             value = value.split(b':')
             return value[0].decode('utf-8'), int(value[1])
         return value.decode('utf-8'), None
-
+    
+    # Return the first element of the header and it's value
+    # This should always be the url
     def get_URL(self):
         return self.get_header_data()[0][1].split(b' ')[0]
     # Return True if the request is a GET request
@@ -88,8 +90,6 @@ class Request:
 
     #  Check if not accepted are in the payload
     def is_acceptable(self):
-        # Return the first element of the header and it's value
-        # This should always be the url
         for tag in FILTER_URL_TAGS:
             # If a tag is found the content is not safe
             if tag in self.get_URL():
